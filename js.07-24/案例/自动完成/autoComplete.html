@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<style>
-			
 			#search {
 				width: 200px;
 				height: 30px;
 				border-radius: 20px;
 				text-indent: 10px;
 				font-size: 20px;
-				border:none;
+				border: none;
 				box-shadow: 0px 0px 4px lightcoral inset;
 			}
 			
 			#lists {
-				
-				width:200px;
+				width: 200px;
 				left: 0px;
 			}
 			
 			.item {
-				color: grey; font-family: "微软雅黑"; font-size: 18px; line-height: 30px;
+				color: grey;
+				font-family: "微软雅黑";
+				font-size: 18px;
+				line-height: 30px;
 				text-indent: 6px;
 				list-style: none;
 				background-color: #DCDCDC;
@@ -31,51 +33,89 @@
 			.on {
 				background-color: lightpink;
 			}
-			
 		</style>
-		
+
 	</head>
+
 	<body>
-		<input type="text" id="search"  />
+		<input type="text" id="search" />
 		<div id="lists"></div>
 	</body>
+
 </html>
 
 <script>
-	
-	
-	var storage = ['java' , 'javase' , 'javaee' , 'js' , 'javascript' , 'j#' , 'oracle' , 'node.js' ];
-	
+	var storage = ['java', 'javase', 'javaee', 'js', 'javascript', 'j#', 'oracle', 'node.js'];
+
+	window.onkeyup = function() {
+		var data = lists.children;
+		if(event.keyCode == 38) {
+			var flag = false;
+			var i = 0;
+			for(; i < data.length; i++) {
+				if(data[i].classList.contains("on")) {
+					data[i].classList.remove("on")
+					flag = true;
+					break;
+				}
+			}
+			if(i == 0 || !flag) {
+				data[data.length - 1].classList.add("on")
+			} else {
+				data[i - 1].classList.add("on")
+			}
+
+		} else if(event.keyCode == 40) {
+			var flag = false;
+			var i = 0;
+			for(; i < data.length; i++) {
+				if(data[i].classList.contains("on")) {
+					data[i].classList.remove("on")
+					flag = true;
+					break;
+				}
+			}
+			if(i == data.length-1 || !flag ) {
+				data[0].classList.add("on")
+			} else {
+				data[i+1].classList.add("on")
+			}
+		} else if( event.keyCode == 13 ) {
+			search.value = document.getElementsByClassName("on")[0].innerText;
+			clearItems(lists)
+		}
+	}
+
 	search.onkeyup = function() {
-		
-		if(search.value=="") {  //什么都不写时 , 清空 , 程序也就停在此处...
+
+		if(search.value == "") { //什么都不写时 , 清空 , 程序也就停在此处...
 			clearItems(lists)
 			return;
 		}
-		
+
 		var result = match(search.value)
 		createItem(result)
 	}
-	
+
 	function match(str) {
 		var temp = [];
-		for (var i = 0; i < storage.length; i++) {
-			if(storage[i].indexOf(str)!=-1) {
+		for(var i = 0; i < storage.length; i++) {
+			if(storage[i].indexOf(str) != -1) {
 				temp.push(storage[i])
 			}
 		}
 		return temp.sort();
 	}
-	
+
 	function createItem(arr) {
-		
+
 		clearItems(lists)
-		
-		for (var i = 0; i < arr.length; i++) {
+
+		for(var i = 0; i < arr.length; i++) {
 			var item = document.createElement("div");
 			item.innerText = arr[i]
 			item.className = "item"
-			
+
 			item.onmouseover = function() {
 				this.classList.add("on")
 			}
@@ -86,19 +126,17 @@
 				search.value = this.innerText;
 				clearItems(lists)
 			}
-			
+
 			lists.appendChild(item)
 		}
 	}
-	
-	function clearItems( obj ) {
-		if(obj.firstChild!=null) {
+
+	function clearItems(obj) {
+		if(obj.firstChild != null) {
 			obj.removeChild(obj.firstChild)
 			clearItems(obj)
 		} else {
 			return;
 		}
 	}
-	
-	
 </script>
