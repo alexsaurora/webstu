@@ -48,9 +48,10 @@
 	var storage = ['java', 'javase', 'javaee', 'js', 'javascript', 'j#', 'oracle', 'node.js'];
 
 	window.onkeyup = function() {
+
 		var data = lists.children;
 		if(event.keyCode == 38) {
-			var flag = false;
+			var flag = false; //判断 有没有  on
 			var i = 0;
 			for(; i < data.length; i++) {
 				if(data[i].classList.contains("on")) {
@@ -75,26 +76,23 @@
 					break;
 				}
 			}
-			if(i == data.length-1 || !flag ) {
+			if(i == data.length - 1 || !flag) {
 				data[0].classList.add("on")
 			} else {
-				data[i+1].classList.add("on")
+				data[i + 1].classList.add("on")
 			}
-		} else if( event.keyCode == 13 ) {
+		} else if(event.keyCode == 13) {
 			search.value = document.getElementsByClassName("on")[0].innerText;
 			clearItems(lists)
+		} else { //正常输入内容的时候 . 
+			if(search.value == "") { //什么都不写时 , 清空 , 程序也就停在此处...
+				clearItems(lists)
+				return;
+			}
+
+			var result = match(search.value)
+			createItem(result)
 		}
-	}
-
-	search.onkeyup = function() {
-
-		if(search.value == "") { //什么都不写时 , 清空 , 程序也就停在此处...
-			clearItems(lists)
-			return;
-		}
-
-		var result = match(search.value)
-		createItem(result)
 	}
 
 	function match(str) {
