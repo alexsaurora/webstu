@@ -19,7 +19,9 @@
 </html>
 <script>
 	btn.onclick = function() {
+		alert("OK1")
 		navigator.geolocation.getCurrentPosition(function(position) {
+			alert("OK2")
 			content.value += "\n 当前经度：" + position.coords.longitude;
 			content.value += "\n 当前纬度：" + position.coords.latitude;
 			content.value += '\n 准确度：' + position.coords.accuracy;
