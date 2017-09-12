@@ -1,7 +1,7 @@
-//这里占有一个新线程，向主线程发送消息
+//子线程向  主线程发送信息 
 postMessage('hello');
 
-//实现之前的一个实例，看是否阻塞
+
 setTimeout(function() {
 	console.log('end 2');
 }, 2000);
@@ -10,6 +10,6 @@ setTimeout(function() {
 }, 100);
 
 onmessage = function(event) {
-	console.log(event.data);
+	console.log("收到了来自于主线程的消息 : " + event.data);
 };
-console.log('end');
+//console.log('end');
