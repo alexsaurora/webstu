@@ -79,8 +79,10 @@
 		//存 也可能是 改
 		storage.setItem( tom.first , json);
 		
-		storage.storage = function() {
-			console.log("--------")
+		storage.onstorage = function(data) {
+			
+			event.preventDefault();
+			alert("")
 		}
 		
 	}
