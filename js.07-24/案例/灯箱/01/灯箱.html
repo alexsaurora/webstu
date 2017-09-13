@@ -13,7 +13,7 @@
 				left: 0;top: 0;
 			}
 			
-			.login{
+			.container {
 				width: 400px;
 				height: 300px;
 				box-shadow: 0px 0px 10px gray;
@@ -29,7 +29,7 @@
 	</head>
 	<body>
 		
-		<input value="login" id="login" type="button"/>
+		<input value="login" id="btn" type="button"/>
 		
 	</body>
 </html>
@@ -39,7 +39,7 @@
 	var lightbox;
 	
 	
-	login.onclick = function() {
+	btn.onclick = function() {
 		createLightBox();
 		
 		lightbox.onclick = function() {
@@ -56,16 +56,16 @@
 		lightbox.style.height = h+"px";
 		lightbox.className = "light-box";
 		
-		createLogin();
+		createContainer();
 		
 		document.body.appendChild(lightbox)
 		
 	}
 	
-	function createLogin() {
+	function createContainer() {
 		
 		var div = document.createElement("div");
-		div.className = "login";
+		div.className = "container";
 		
 		
 		div.onclick = function() {
