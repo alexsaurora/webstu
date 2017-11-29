@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			button {
+				margin-top: 2px;
+				
+				width: 50px;
+				height: 50px;
+				
+			}
+			button:hover{
+			box-shadow: 0px 0px 10px #696969 inset;
+		}
+			.dengyu{
+				width: 105px;
+				background-color:#d2691e;
+			}
+			.number{
+				background-color:#FFF5EE;
+			}
+			input{
+				height: 80px;
+				width: 215px;
+				background-color: darkgray;
+				font-size: 30px;
+			}
+			#container{
+				height: auto;
+				width: 225px;
+				border: 2px solid;
+				background-color: #BBBBBB;
+				margin: auto;
+			}
+			#button{
+				width: auto;
+			}
+			div{
+				margin-left: 2px;
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<div id="container">
+			<div>
+				<input id="result" value="" type="text" autofocus="" />
+			</div>
+			<div id="button">
+				
+			
+			<div>
+				<button onclick="clearNum()">清零</button>
+				<button onclick="backNum()">退格</button>
+				<button onclick="inputEvent(this)">%</button>
+				<button onclick="inputEvent(this)">/</button>
+			</div>
+			<div>
+				<button onclick="inputEvent(this)" class="number">1</button>
+				<button onclick="inputEvent(this)" class="number">2</button>
+				<button onclick="inputEvent(this)" class="number">3</button>
+				<button onclick="inputEvent(this)" >+</button>
+
+			</div>
+
+			<div>
+				<button onclick="inputEvent(this)" class="number">4</button>
+				<button onclick="inputEvent(this)" class="number">5</button>
+				<button onclick="inputEvent(this)" class="number">6</button>
+				<button onclick="inputEvent(this)">-</button>
+			</div>
+
+			<div>
+				<button onclick="inputEvent(this)" class="number">7</button>
+				<button onclick="inputEvent(this)" class="number">8</button>
+				<button onclick="inputEvent(this)" class="number">9</button>
+				<button onclick="inputEvent(this)">*</button>
+			</div>
+
+			<div>
+				<button onclick="inputEvent(this)" class="number">0</button>
+				<button onclick="inputEvent(this)" class="number">.</button>
+				<button onclick="inputOper(this)" class="dengyu">=</button>
+
+			</div>
+            </div>
+		</div>
+		
+	</body>
+
+</html>
+
+<script>
+	function input() {
+		document.getElementById('result').value = document.getElementsByName().value;
+	}
+	//读取按钮的值传给输入框
+	function inputEvent(e) {
+		var val = e.innerHTML;
+		var xsval = document.getElementById("result");
+		xsval.value += val;
+	}
+	//计算
+	function inputOper() {
+		var xsval = document.getElementById("result");
+		xsval.value = eval(document.getElementById("result").value);
+	}
+	//清零
+	function clearNum() {
+		var xsval = document.getElementById("result");
+		xsval.value = "";
+		document.getElementById("result").focus();
+	}
+
+	//退格
+	function backNum() {
+		var arr = document.getElementById("result");
+		arr.value = arr.value.substring(0, arr.value.length - 1);
+	}
+</script>
