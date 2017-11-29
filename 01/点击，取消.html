@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#aaaa{
+				height: 50px;
+				width: 50px;
+				background-color: gold;
+			}
+			#bbbb{
+				height: 100px;
+				width: 100px;
+				background-color: #2B99FF; 
+				/*visibility: hidden;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="aaaa">
+		
+		</div>
+		<div id="bbbb">
+			
+		</div>
+		
+	</body>
+</html>
+<script type="text/javascript" src="jquery/jquery.js" ></script> 
+<script>
+	 $(document).ready(function(){
+	   $("#aaaa").click(function(){
+	   	$("#bbbb").toggle();
+	   	
+	   });
+	 });
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			
+			#container{
+				height: 400px;
+				width: 400px;
+				background-color: #20B2AA;
+				position: relative;
+				
+				
+			}
+			
+			.small{
+				height: 100px;
+				width: 400px;
+				background-color: #FF4500;
+				position: absolute;
+				bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="small"></div>
+		</div>
+	</body>
+</html>
+*div竖直居上：
+ * 1，div布局默认居上
+   2，父层弹性盒子，默认居上(或者align-items: flex-start)
+   3, 绝对定位，父层relative，子层absolute， top:0;
+   
+div竖直居中：
+1，父层弹性盒子，align-items: center
+2，使用display:table-cell来把父层模拟为一个表格单元格(只能在IE8+，谷歌，火狐使用，IE6，7都无效)，
+        父层写vertical-align: middle即可。
+3，使用绝对定位，父层relative，子层absolute(只适用于知道元素高度和宽度)。将top设为50%,
+    margin-top设为负的元素高度的一半。
+    
+div竖直居下：
+1，父层弹性盒子，align-items: flex-end
+2, 绝对定位，父层relative，子层absolute，bottom:0;

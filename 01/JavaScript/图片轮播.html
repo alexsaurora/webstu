@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		
+		<button onclick="stop()">停止</button>
+		<div id="div1">
+
+			<img src="img/聊天4冠希哥.jpg" />
+
+			<img src="img/吴亦凡.jpg" />
+
+			<img src="img/聊天8鹿晗.jpg" />
+
+			<img src="img/聊天9薛之谦.jpg" />
+
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	var images = document.getElementsByTagName('img');
+	var pos = 0;
+	var len = images.length;
+
+	window.onload = function() {
+
+	}
+	
+		
+	
+	var task = setInterval(function() {
+        
+		images[pos].style.display = 'none';
+		pos = ++pos == len ? 0 : pos;
+		images[pos].style.display = 'inline';
+
+	}, 1000);
+   
+	function stop() {
+		window.clearInterval(task);
+	}
+</script>

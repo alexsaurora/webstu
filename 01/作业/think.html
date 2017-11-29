@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+   
+    <meta charset="utf-8">
+    <style type="text/css" src="js/jquery.totalautocomplete.css"></style>
+    <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+    <script src="js/jquery.totalautocomplete.js" type="text/javascript"></script>
+    <style type="text/css"></style>
+    <script type="text/javascript">
+        $(function(){
+
+            $("#test").totalAutocomplete({
+                width:300,
+                data:[{title:"中国好声音",result:{ff:"qq"}}, 
+                    {title:"中国移动网上营业厅"},
+                    {title:"中国银行"},
+                    {title:"中国移动"},
+                    {title:"中国好声音第三期"},
+                    {title:"中国好声音 第一期"},
+                    {title:"中国电信网上营业厅"},
+                    {title:"中国工商银行"},
+                    {title:"中国好声音第二期"},
+                    {title:"中国地图"}],
+                callback:function(data){
+                   // alert(data.title);
+                }
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div>
+    <input id="test" type="text" value="" class="text"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#input {
+				width: 720px;
+				height: 40px;
+				display: flex;
+				flex-flow: row;
+				margin: auto;
+				/*border: 1px solid  red;*/
+			}
+			
+			#total {
+				height: auto;
+			}
+			
+			#bottom {
+				height: 30px;
+				width: 675px;
+				display: flex;
+				flex-flow: row;
+				margin: auto;
+				font-weight: 800;
+				line-height: 30px;
+				text-align: center;
+			}
+			
+			#cancel {
+				height: 30px;
+				width: 33%;
+				border: 1px solid black;
+				background-color: #2B99FF;
+				
+			}
+			
+			#opposite {
+				height: 30px;
+				width: 33%;
+				border: 1px solid black;
+				background-color: #2B99FF;
+			}
+			
+			#del {
+				height: 30px;
+				width: 33%;
+				border: 1px solid black;
+				background-color: orangered;
+			}
+			
+			input {
+				height: 25px;
+			}
+			
+			table {
+				border-collapse: collapse;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="input">
+			<div>
+				<input id="input1" />
+			</div>
+			<div>
+				<input id="input2" />
+			</div>
+			<div>
+				<input id="input3" />
+			</div>
+			<div>
+				<input id="input4" />
+			</div>
+			<div id="add">
+				<input type="button" value="+" />
+			</div>
+		</div>
+		<hr />
+		<div id="middle">
+
+			<table id="table" border="1" align="center" height="50%" width="50%" cellspacing="10 " cellpadding="10">
+
+				<th>
+					<input type="checkbox" id="total" />全选
+				</th>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>电话</th>
+				<!--<th>操作</th>-->
+				<tr>
+				</tr>
+			</table>
+
+		</div>
+		<div id="bottom">
+			<div id="cancel">取消全选</div>
+			<div id="opposite">反选</div>
+			<div id="del">删除所选项</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	window.onload = function() {
+		var input = document.getElementById("input");
+		var input1 = document.getElementById("input1");
+		var input2 = document.getElementById("input2");
+		var input3 = document.getElementById("input3");
+		var input4 = document.getElementById("input4");
+        var sm = document.getElementsByName("small");
+		add.onclick = function() {
+
+			var tr = document.createElement("tr");
+
+			var td0 = document.createElement("td");
+			var cb = document.createElement("input")
+			var td1 = document.createElement("td");
+			var td2 = document.createElement("td");
+			var td3 = document.createElement("td");
+			var td4 = document.createElement("td");
+			//		var del = document.createElement("td");
+			cb.type = "checkbox";
+			cb.name = "small";
+
+			td1.innerHTML = input1.value;
+			td2.innerHTML = input2.value;
+			td3.innerHTML = input3.value;
+			td4.innerHTML = input4.value;
+			//			del.innerHTML = "删除";
+
+			table.appendChild(tr);
+			td0.appendChild(cb);
+			tr.appendChild(td0);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tr.appendChild(td3);
+			tr.appendChild(td4);
+			//			tr.appendChild(del);
+
+			input1.value = "";
+			input2.value = "";
+			input3.value = "";
+			input4.value = "";
+
+			del.onclick = function() {
+           
+				if(total.checked == true) {
+					trs = table.getElementsByTagName("tr");
+					for(var i = trs.length - 1; i > 0; i--) {
+						table.deleteRow(i);
+					}
+					total.checked = false;
+				} 
+				else { 
+//只能一行一行的删除
+//					for(var i = 0; i < sm.length; i++){
+//						if(sm[i].checked == true) {
+//							
+//							table.removeChild(sm[i].parentNode.parentNode);
+//						}
+//					}
+
+                   for (var j=sm.length-1;j>=0;j--) {
+                   	if (sm[j].checked) { 
+                   		table.removeChild(sm[j].parentNode.parentNode);
+                   	}
+                   }
+				}
+			}
+
+		}
+
+		//		del.onclick = function() {
+		//			if(confirm("确定删除吗？")) {
+		//				table.removeChild(tr);
+		//			} else {
+		//
+		//			}
+		//		}
+
+		
+
+		total.onclick = function() {
+			if(total.checked == true) {
+				for(var i = 0; i < sm.length; i++) {
+					sm[i].checked = true;
+				}
+			} else if(total.checked == false) {
+				for(var i = 0; i < sm.length; i++) {
+					sm[i].checked = false;
+				}
+			}
+		}
+
+		cancel.onclick = function() {
+			total.checked = false;
+			for(var i = 0; i < sm.length; i++) {
+				sm[i].checked = false;
+			}
+		}
+
+		opposite.onclick = function() {
+			for(var i = 0; i < sm.length; i++) {
+				if(sm[i].checked == true) {
+					sm[i].checked = false;
+				} else if(sm[i].checked == false) {
+					sm[i].checked = true;
+				}
+			}
+		}
+
+	}
+</script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#container{
+				height: 400px;
+				width: 400px;
+				background-color: #20B2AA;
+				
+				
+			}
+			
+			.small{
+				
+				background-color: #FF4500;
+				left:100px;
+				top: 100px;
+				right: 100px;
+				bottom: 100px;
+			}
+			
+			
+			
+			
+			
+			
+			
+			/*.wraper{
+				float: left;
+				position: relative;
+				left: 50%;
+				
+				background-color: #7B7B7B;
+				
+				
+			}
+			.small{
+				height: 100px;
+				width: 100px;
+				background-color: #FF4500;
+				position: relative;
+				left: -50%;
+			
+			}*/
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="wraper">
+			   <div class="small">1</div>
+			</div>
+		</div>
+	</body>
+</html>
+/*div水平居左：
+ * 1，div布局默认居左
+   2，父层弹性盒子，默认居左(或者justify-content: flex-start)
+   3, 绝对定位，父层relative，子层absolute， left:0;
+   
+   
+ * div水平居中：
+ 1，子层   margin：auto (对浮动元素或绝对定位元素无效)
+ 2，父层弹性盒子，使用justify-content:center
+ 3, 使用display:table-cell来把父层模拟为一个表格单元格(只能在IE8+，谷歌，火狐使用，IE6，7都无效)，
+        父层写text-align: center，子层写display: inline-flex(必须写)
+ 4，使用绝对定位：父层relative，子层absolute(只适用于知道元素高度和宽度)。将left设为50%,
+    margin-left设为负的元素宽度的一半。
+ 5，另一种绝对定位：只适用于知道高宽，并且只支持IE9+，谷歌，火狐等现代浏览器。
+        如果不定义元素的高宽的话，那么它的宽由left，right的值决定，高由top，bottom的值决定，所以必须设置元素高宽。
+        如果改变left，right，top，bottom的值，还能让元素向某个方向偏移。(如果要水平竖直同时居中，margin：auto)
+        也必不可少。
+ 6，使用浮动配合相对定位来进行水平居中。(不需要知道需要居中的元素的宽度，即使宽度是不断变化的也行)
+         缺点：需要一个多余的元素来包裹要居中的元素
+         原理：将浮动元素相对定位到父层元素宽度50%的地方，但此时元素还不是居中的，而是比居中的那个位置多出来
+         自身一半的宽度。这是就需要它里面的子元素再用一个相对定位，把多出的自身的一半宽度拉回来，而因为相对定位
+         正是相对于自身来定位的，所以自身一半的宽度只要把left和right设为50%就可以得到了，因此不用知道自身的
+         实际宽度。
+     
+   div水平居右：
+   1，父层弹性盒子，justify-content: flex-end;
+   2, 绝对定位，父层relative，子层absolute， right:0;
+   */

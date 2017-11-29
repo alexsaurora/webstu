@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#container{
+				display: flex;
+				flex-flow: column;
+			}
+			#icon{
+				height: 150px;
+				width: 230px;
+				background-image: url(../img/bd_logo1.png) ;
+				background-size: contain;
+				background-repeat: no-repeat;
+				margin: auto;
+				
+				
+			}
+			#main{
+				height: auto;
+				display: flex;
+				flex-flow: row;
+				margin: auto;
+			}
+			#input{
+				height: 34px;
+				width: 550px;
+				font-size: 20px;
+				padding-left: 8px;
+			}
+			#search{
+				height: 39px;
+				width: 100px;
+				text-align: center;
+				line-height: 39px;
+				color: white;
+				background-color: dodgerblue;
+				
+			}
+			#list{
+				width: 550px;
+				border: 1px solid lightgray;
+			}
+			.item{
+				color: black;
+				background-color:white;
+				font-size: 18px;
+				line-height: 30px;
+				margin-left: 8px;
+			}
+			.on{
+				background-color:lightgray;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="container">
+			<div id="icon"></div>
+			<div id="main">
+				<div>
+					<input id="input" />
+					<div id="list"></div>
+				</div>
+				<div id="search">百度一下</div>
+			</div>
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var input=document.getElementById("input")
+	var storage=[ '中国话','中国菜','中国有嘻哈','中国雾霾','中文','中通快递'];
+	
+	input.onkeyup=function(){
+		
+		if (input.value=="") {
+			clearitems(list);
+			return;
+		}
+		var result=match(input.value);
+		createitem(result);
+	}
+	
+	function match(str){
+		var temp=[];
+		for (var i=0;i<storage.length;i++) {
+			if (storage[i].indexOf(str)!=-1) {
+				temp.push(storage[i]);
+			}
+		}
+		return temp.sort();
+	}
+	
+	function createitem(arr){
+		clearitems(list)
+		for (var i=0;i<arr.length;i++) {
+			var item=document.createElement("div");
+			item.innerText=arr[i];
+			item.className="item";
+			item.onmouseover=function (){
+				this.classList.add("on");
+			}
+			item.onmouseout=function(){
+				this.classList.remove("on");
+			}
+			item.onclick=function(){
+				input.value=this.innerText;
+				clearitems(list);
+			}
+			list.appendChild(item);
+		}
+	}
+	
+	function clearitems(obj){
+		
+		if (obj.firstChild!=null) {
+			obj.removeChild(obj.firstChild);
+			clearitems(obj);
+			
+		}else{
+			return ;
+		}
+	}
+</script>

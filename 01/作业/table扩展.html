@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			table {
+				font-family: "微软雅黑";
+				font-size: 12px;
+				text-align: center;
+			}
+			
+			td {
+				width: 115px;
+				height: 30px;
+			}
+			
+			#plsc:hover {
+				box-shadow: 0px 0px 8px lightsteelblue inset;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<input type="" name="content" id="content1" />
+		<input type="" name="content" id="content2" />
+		<input type="" name="content" id="content3" />
+		<input type="button" name="add" id="add" value="+" style="width: 40px;background-color: #87CEFA;" />
+		<br /><br />
+		<hr />
+		<table id="tab" border="1" cellspacing="1">
+			<tr>
+				<td>
+					<input type="checkbox" id="big" />全选
+				</td>
+				<td>姓名</td>
+				<td>年龄</td>
+				<td>电话</td>
+				<td id="plsc" style="background-color: orange; font-weight: bold;">批量删除</td>
+			</tr>
+		</table>
+
+		<hr />
+	</body>
+
+</html>
+<script>
+	window.onload = function() {
+
+		add.onclick = function() {
+			var tr = document.createElement("tr");
+			var cb = document.createElement("input")
+			var td4 = document.createElement("td")
+			var td1 = document.createElement("td")
+			var td2 = document.createElement("td")
+			var td3 = document.createElement("td")
+			var shan = document.createElement("td")
+			cb.type = "checkbox";
+			cb.name = "small";
+
+			if(content1.value != "") {
+				td1.innerHTML = content1.value;
+			} else {
+				return false;
+			}
+			if(content2.value != "") {
+				td2.innerHTML = content2.value;
+			} else {
+				return false;
+			}
+			if(content3.value != "") {
+				td3.innerHTML = content3.value;
+			} else {
+				return false;
+			}
+			shan.style.backgroundColor = "red";
+			shan.style.textAlign = "center";
+			shan.innerHTML = "删除";
+			shan.onclick = function() {
+				if(confirm("真的要删除吗？ ")) {
+					tab.removeChild(tr);
+				} else {
+
+				}
+			}
+			tr.appendChild(td4);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tr.appendChild(td3);
+			td4.appendChild(cb);
+			tr.appendChild(shan);
+			tab.appendChild(tr);
+			content1.value = "";
+			content2.value = "";
+			content3.value = "";
+
+		}
+		////////////////////////////////////////////////////////////////////////////////
+		var smObj= document.getElementsByName("small");
+		big.onclick = function() { 
+			if(big.checked == true) {
+
+				for(var i = 0; i < smObj.length; i++)
+					smObj[i].checked = true;
+			} else if(big.checked == false) {
+
+				for(var i = 0; i < smObj.length; i++)
+					smObj[i].checked = false;
+			}
+		}
+		////////////////////////////////////////////////////////////////////////////////		
+		plsc.onclick = function() {
+			for(var i = 0; i < smObj.length; i++) {
+				if(smObj[i].checked == true) {
+					if(confirm("真的要删除吗？ ")) {
+						tab.removeChild(smObj[i].parentNode.parentNode)
+					}
+				}
+			}
+		}
+	}
+</script>

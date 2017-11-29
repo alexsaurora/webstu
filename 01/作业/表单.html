@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form id="frm" action = "http://s.taobao.com/search">
+			<div>姓名</div><input id="name" /><span id="result1"></span>
+			<br />
+			<div>身份证号</div><input id="peoples" /><span id="result2"></span>
+			<br />
+			<div>电话</div><input id="phonenumber" /><span id="result3"></span>
+			<br />
+			<div>邮箱</div><input id="email" /><span id="result4"></span>
+			<div>家庭住址</div>
+
+			<select id="prov" onchange="changeCity(this);">
+				<option value='-1'>--请选择--</option>
+			</select>
+
+			<select id="city" onchange="changeArea(this);">
+				<option value='-1'>--请选择市--</option>
+			</select>
+
+			<select id="area">
+				<option value='-1'>--请选择区--</option>
+			</select>
+
+			<br />
+			<input type="button" id="btn" value="提交" />
+
+		</form>
+	</body>
+
+</html>
+<script>
+	window.onload = function() {
+
+		var frm = document.getElementById("frm");
+		var name = document.getElementById("name");
+		var peoples = document.getElementById("peoples");
+		var phonenumber = document.getElementById("phonenumber");
+		var email = document.getElementById("email");
+		var result1 = document.getElementById("result1");
+		var result2 = document.getElementById("result2");
+		var result3 = document.getElementById("result3");
+		var result4 = document.getElementById("result4");
+		var btn=document.getElementById("btn");
+        
+       
+		function checkname(str) {
+			
+			var reg1=(/^[\u4e00-\u9fa5]{2,4}$/);
+			return reg1.test(str);
+			
+		}
+		function checkpeoples(str) {
+			
+			var reg2=(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/);
+			return reg2.test(str);
+			
+		}
+		function checkphonenumber(str) {
+			
+			var reg3=(/^1(3|4|5|7|8)\d{9}$/);
+			return reg3.test(str);
+			
+		}
+		function checkemail(str) {
+			
+			var reg4=(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+			return reg4.test(str);
+			
+		}
+		
+		
+		name.onblur = function() {
+			if(!checkname(name.value)) { 
+				result1.innerHTML = "<span>公民姓名应2位到4位的汉字</span>";
+				
+			} 
+            else{
+				result1.innerHTML = "<span style='color: green;'>输入正确~</span>"
+			}
+			
+			
+		}
+
+		peoples.onblur = function() {
+			
+			if(!checkpeoples(peoples.value)) {
+				result2.innerHTML = "<span>身份证号码有误</span>";
+				return false;
+			} else {
+				result2.innerHTML = "<span style='color: green;'>输入正确~</span>"
+			}
+		}
+
+		phonenumber.onblur = function() {
+			
+			if(!checkphonenumber(phonenumber.value)) {
+				result3.innerHTML = "<span>输入的手机号有误</span>";
+				return false;
+			} else {
+				result3.innerHTML = "<span style='color: green;'>输入正确~</span>"
+			}
+		}
+
+		email.onblur = function() {
+			if(!checkemail(email.value)) {
+				result4.innerHTML = "<span>输入的邮箱地址有误</span>"
+				return false;
+			} else {
+				result4.innerHTML = "<span style='color: green;'>输入正确~</span>"
+			}
+		}
+
+		btn.onclick = function() {
+			if((!checkname(name.value))&&(!checkpeoples(peoples.value))&&(!checkphonenumber(phonenumber.value))&&(!checkemail(email.value))){
+				alert("提交失败，请正确输入！")
+				return false;
+			}
+		    else{
+		    	alert("提交成功！")
+		    	frm.action = "http://s.taobao.com/search";	
+	            frm.submit();
+		    }
+		}
+     
+//   btn.onclick=function(){
+//   	frm.action = "http://s.taobao.com/search";	
+//   	 frm.submit();
+//   }
+		
+		
+}
+	
+
+	var arr_prov = ["山西", "山东", "河南"]; //////直接声明Array
+	var arr_city = [
+
+		["太原市", "朔州市"],
+		["青岛市", "济南市"],
+		["郑州市", "洛阳市"]
+	]
+	var arr_area = [
+		[
+			["迎泽区", "小店区"],
+			["朔城区", "山阴县"]
+		],
+		[
+			["崂山区", "李沧区"],
+			["天桥区", "历城区"]
+		],
+		[
+			["金水区", "中原区"],
+			["洛龙区", "涧西区"]
+		]
+	]
+
+	//设置一个省的公共下标
+	var pIndex = -1;
+	var province = document.getElementById("prov");
+	var city = document.getElementById("city");
+	var area = document.getElementById("area");
+	for(var i = 0; i < arr_prov.length; i++) {
+		var op = new Option(arr_prov[i], i);
+		province.options.add(op);
+	}
+
+	function changeCity(obj) {
+		if(obj.value == -1) {
+			city.Object.length = 0;
+			area.Object.length = 0;
+		}
+		//获取值
+		var val = obj.value;
+		pIndex = obj.value;
+		//获取ctiry
+		var cs = arr_city[val];
+		//获取默认区
+		var as = arr_area[val][0];
+
+		//先清空市
+		city.options.length = 0;
+		area.options.length = 0;
+		for(var i = 0; i < cs.length; i++) {
+			var op = new Option(cs[i], i);
+			city.options.add(op);
+		}
+		for(var i = 0; i < as.length; i++) {
+			var op = new Option(as[i], i);
+			area.options.add(op);
+		}
+
+	}
+
+	function changeArea(obj) {
+		var val = obj.selectedIndex;
+		var as = arr_area[pIndex][val];
+		area.options.length = 0;
+		for(var i = 0; i < as.length; i++) {
+			var op = new Option(as[i], i);
+			area.options.add(op);
+		}
+	}
+</script>

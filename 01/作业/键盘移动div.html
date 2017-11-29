@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        #div1{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: #FFB355;
+        }
+ 
+        #div2{
+            position: absolute;
+            left: 200px;
+            width: 200px;
+            height: 200px;
+            background-color: #6688cc;
+        }
+ 
+    </style>
+</head>
+<body onkeydown="press()">
+    <div id="div1">箭头控制</div>
+    <div id="div2">字母控制</div>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!--<script src="jquery-2.1.1.min.js"></script>-->
+    <script>
+        var isArrow = false, //点击的是否为箭头
+                size = 10; //每次移动距离
+        var  div1 = $('#div1'),
+                div1L = div1.offset().left, //与屏幕左边的距离
+                div1T = div1.offset().top;  //与屏幕顶部的距离
+
+ 
+        var  div2 = $('#div2'),
+                div2L = div2.offset().left, //与屏幕左边的距离
+                div2T = div2.offset().top;  //与屏幕顶部的距离
+ 
+        function press(){
+            var code = window.event.keyCode;
+            switch(code){
+                case 38:
+                //↑
+                    div1T -= size;
+                    isArrow = true;
+                    console.log(div1T)
+                    break;
+                case 40:
+                //↓
+                    div1T += size;
+                    isArrow = true;
+                    console.log(div1T)
+                    break;
+                case 37:
+                //←
+                    div1L -= size;
+                    isArrow = true;
+                    console.log(div1L)
+                    break;
+                case 39:
+                //→
+                    div1L += size;
+                    isArrow = true;
+                    console.log(div1L)
+                    break;
+                case 87:
+                //W
+                    div2T -= size;
+                    isArrow = false;
+                    console.log(div2T)
+                    break;
+                case 83:
+                //S
+                    div2T += size;
+                    isArrow = false;
+                    console.log(div2T)
+                    break;
+                case 65:
+                //A
+                    div2L -= size;
+                    isArrow = false;
+                    console.log(div2L)
+                    break;
+                case 68:
+                //D
+                    div2L += size;
+                    isArrow = false;
+                    console.log(div2L)
+                    break;
+            }
+ 
+            if(isArrow){
+                div1.css({'top':div1T,'left':div1L});
+            }else{
+                div2.css({'top':div2T,'left':div2L});
+            }
+ 
+        }
+    </script>
+</body>
+</html>

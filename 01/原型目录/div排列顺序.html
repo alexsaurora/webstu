@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#container{
+				height: 400px;
+				width: 200px;
+				background-color: #20B2AA;
+				display: flex;
+				flex-flow:nowrap row-reverse;
+			}
+			.smd{
+				height: 100px;
+				width: 100px;
+				background-color: #FF4500;
+				margin: 20px;
+				
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="smd">1</div>
+			<div class="smd">2</div>
+			<div class="smd">3</div>
+		</div>
+	</body>
+</html>
+/* div默认情况下是竖直排列。
+ * 在display:flex情况下，默认横向排列
+ * flex-wrap定义是否需要拆行以使得弹性项目能被容器包含。  -reverse代表相反的方向。
+ */
